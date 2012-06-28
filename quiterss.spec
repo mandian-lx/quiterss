@@ -2,13 +2,13 @@
 
 Name:		quiterss
 Summary:	RSS/Atom feed reader written on Qt
-Version:	0.8.6
+Version:	0.9.1
 Release:	1
 License:	GPLv3+
 Group:		Networking/News
 URL:		https://code.google.com/p/quite-rss/
 Source0:	https://quite-rss.googlecode.com/files/%{oname}-%{version}-src.tar.gz
-Patch0:		QuiteRSS-0.8.6-3rdparty.patch
+Patch0:		QuiteRSS-0.9.1-3rdparty.patch
 BuildRequires:	qt4-devel
 BuildRequires:	qtsingleapplication-devel
 BuildRequires:	sqlite3-devel
@@ -27,8 +27,9 @@ find . -type f -executable -exec chmod a-x {} \;
 
 %install
 make install INSTALL_ROOT=%{buildroot}
+%find_lang %{name} --with-qt
 
-%files
+%files -f %{name}.lang
 %defattr(0644,root,root,0755)
 %attr(0755,root,root) %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
