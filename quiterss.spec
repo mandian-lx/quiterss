@@ -27,7 +27,19 @@ find . -type f -executable -exec chmod a-x {} \;
 
 %install
 make install INSTALL_ROOT=%{buildroot}
+
+%if %{mdvver} >= 201200
 %find_lang %{name} --with-qt
+%else
+cat > %{name}.lang << EOF
+%lang(en) /usr/share/quiterss/lang/quiterss_en.qm
+%lang(de) /usr/share/quiterss/lang/quiterss_de.qm
+%lang(ru) /usr/share/quiterss/lang/quiterss_ru.qm
+%lang(hu) /usr/share/quiterss/lang/quiterss_hu.qm
+%lang(fr) /usr/share/quiterss/lang/quiterss_fr.qm
+%lang(es) /usr/share/quiterss/lang/quiterss_es.qm
+EOF
+%endif
 
 %files -f %{name}.lang
 %defattr(0644,root,root,0755)
