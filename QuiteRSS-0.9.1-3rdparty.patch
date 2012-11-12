@@ -1,0 +1,23 @@
+Index: QuiteRSS-0.9.1-src/QuiteRSS.pro
+===================================================================
+--- QuiteRSS-0.9.1-src.orig/QuiteRSS.pro
++++ QuiteRSS-0.9.1-src/QuiteRSS.pro
+@@ -1,5 +1,9 @@
+ QT += core gui network xml webkit sql
+ 
++CONFIG += qtsingleapplication
++
++LIBS += -lsqlite3
++
+ TEMPLATE = app
+ 
+ HEADERS += \
+@@ -72,8 +76,6 @@ OBJECTS_DIR = $${BUILD_DIR}/obj/
+ MOC_DIR = $${BUILD_DIR}/moc/
+ RCC_DIR = $${BUILD_DIR}/rcc/
+ 
+-include(3rdparty/sqlite.pri)
+-include(3rdparty/qtsingleapplication/qtsingleapplication.pri)
+ include(lang/lang.pri)
+ 
+ win32 {
