@@ -47,3 +47,14 @@ EOF
 %{_datadir}/applications/%{name}.desktop
 %{_iconsdir}/hicolor/*/apps/%{name}.*
 %{_datadir}/%{name}/sound/notification.wav
+
+
+%changelog
+* Thu Jun 28 2012 Dmitry Mikhirev <dmikhirev@mandriva.org> 0.9.1-1
++ Revision: 807381
+- update to 0.9.1
+
+* Thu Apr 19 2012 Dmitry Mikhirev <dmikhirev@mandriva.org> 0.8.6-1
++ Revision: 792009
+- imported package quiterss
+
