@@ -22,7 +22,7 @@ QuiteRSS is RSS/Atom feed reader written on Qt.
 find . -type f -executable -exec chmod a-x {} \;
 
 %build
-export CFLAGS=%{optflags}
+export CFLAGS="%{optflags}"
 %qmake_qt4
 %make
 
