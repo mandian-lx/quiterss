@@ -3,7 +3,7 @@
 Name:		quiterss
 Summary:	RSS/Atom feed reader written on Qt
 Version:	0.12.5
-Release:	%mkrel 1
+Release:	2
 License:	GPLv3+
 Group:		Networking/News
 URL:		https://code.google.com/p/quite-rss/
@@ -22,6 +22,7 @@ QuiteRSS is RSS/Atom feed reader written on Qt.
 find . -type f -executable -exec chmod a-x {} \;
 
 %build
+export CFLAGS=%{optflags}
 %qmake_qt4
 %make
 
