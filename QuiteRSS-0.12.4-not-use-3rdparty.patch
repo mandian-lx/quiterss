@@ -1,0 +1,52 @@
+diff -rupN QuiteRSS-0.12.4-src.old/QuiteRSS.pro QuiteRSS-0.12.4-src/QuiteRSS.pro
+--- QuiteRSS-0.12.4-src.old/QuiteRSS.pro	2013-03-30 14:41:45.000000000 +0100
++++ QuiteRSS-0.12.4-src/QuiteRSS.pro	2013-03-30 15:15:25.719712509 +0100
+@@ -7,6 +7,10 @@ count(VERSION_REV, 1) {
+ 
+ QT += core gui network xml webkit sql
+ 
++CONFIG += qtsingleapplication
++
++LIBS += -lsqlite3
++
+ TEMPLATE = app
+ 
+ HEADERS += \
+@@ -106,8 +110,6 @@ OBJECTS_DIR = $${BUILD_DIR}/obj/
+ MOC_DIR = $${BUILD_DIR}/moc/
+ RCC_DIR = $${BUILD_DIR}/rcc/
+ 
+-include(3rdparty/sqlite.pri)
+-include(3rdparty/qtsingleapplication/qtsingleapplication.pri)
+ include(3rdparty/qyursqltreeview/qyursqltreeview.pri)
+ include(lang/lang.pri)
+ 
+diff -rupN QuiteRSS-0.12.4-src.old/src/aboutdialog.cpp QuiteRSS-0.12.4-src/src/aboutdialog.cpp
+--- QuiteRSS-0.12.4-src.old/src/aboutdialog.cpp	2013-03-26 17:13:49.000000000 +0100
++++ QuiteRSS-0.12.4-src/src/aboutdialog.cpp	2013-03-30 15:16:32.277529883 +0100
+@@ -1,10 +1,6 @@
+ #include "aboutdialog.h"
+ #include "VersionNo.h"
+-#if QT_VERSION >= 0x040800
+-#include <sqlite_qt48x/sqlite3.h>
+-#else
+-#include <sqlite_qt47x/sqlite3.h>
+-#endif
++#include <sqlite3.h>
+ #include <qyursqltreeview.h>
+ 
+ AboutDialog::AboutDialog(const QString &lang, QWidget *parent) :
+diff -rupN QuiteRSS-0.12.4-src.old/src/dbmemfilethread.cpp QuiteRSS-0.12.4-src/src/dbmemfilethread.cpp
+--- QuiteRSS-0.12.4-src.old/src/dbmemfilethread.cpp	2013-03-26 17:13:49.000000000 +0100
++++ QuiteRSS-0.12.4-src/src/dbmemfilethread.cpp	2013-03-30 15:17:00.111617190 +0100
+@@ -1,9 +1,5 @@
+ #include "dbmemfilethread.h"
+-#if QT_VERSION >= 0x040800
+-#include <sqlite_qt48x/sqlite3.h>
+-#else
+-#include <sqlite_qt47x/sqlite3.h>
+-#endif
++#include <sqlite3.h>
+ #include <QDebug>
+ 
+ DBMemFileThread::DBMemFileThread(QString filename, QObject *pParent)
