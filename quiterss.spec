@@ -1,15 +1,18 @@
-%define oname	QuiteRSS
+%define	oname		QuiteRSS
+#define	oversion	0.13.0.2610
+%define	qtsingleapp	%{_prefix}/lib/qt4/include/QtSolutions/
 
 Name:		quiterss
 Summary:	RSS/Atom feed reader written on Qt
-Version:	0.12.5
-Release:	2
+Version:	0.13.2
+Release:	1
 License:	GPLv3+
 Group:		Networking/News
 URL:		https://code.google.com/p/quite-rss/
 Source0:	https://quite-rss.googlecode.com/files/%{oname}-%{version}-src.tar.bz2
-Patch0:		QuiteRSS-0.12.4-not-use-3rdparty.patch
-BuildRequires:	qt4-devel
+#Patch0:	QuiteRSS-0.13.0-not-use-3rdparty.patch
+Patch1:		QuiteRSS-0.13.2-fix-install-prefix.patch
+BuildRequires:	qt4-devel >= 4.7.0
 BuildRequires:	qtsingleapplication-devel
 BuildRequires:	sqlite3-devel
 
@@ -17,13 +20,14 @@ BuildRequires:	sqlite3-devel
 QuiteRSS is RSS/Atom feed reader written on Qt.
 
 %prep
-%setup -q -n %{oname}-%{version}-src
-%patch0 -p1
+%setup -qn %{oname}-%{version}-src
+#patch0 -p1
+%patch1 -p1
 find . -type f -executable -exec chmod a-x {} \;
 
 %build
 export CFLAGS="%{optflags}"
-%qmake_qt4
+%qmake_qt4 SYSTEMQTSA=%{qtsingleapp}
 %make
 
 %install
@@ -68,6 +72,15 @@ EOF
 
 
 %changelog
+* Wed Jul 31 2013 Giovanni Mariani <mc2374@mclink.it> 0.13.2-1
+- New release 0.13.2
+- Dropped P0 (now useless) and rediffed P1
+
+* Sat Jun 01 2013 Giovanni Mariani <mc2374@mclink.it> 0.13.0-1
+- New release 0.13.0
+- Redone P0 (now the systen sqlite is used by default)
+- Added P1 to fix install path
+
 * Fri May 10 2013 Giovanni Mariani <mc2374@mclink.it> 0.12.5-1
 - New release 0.12.5
 - Fixed file list

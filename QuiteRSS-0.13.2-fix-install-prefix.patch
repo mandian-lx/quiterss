@@ -1,0 +1,12 @@
+diff -rupN QuiteRSS-0.13.2-src.old/QuiteRSS.pro QuiteRSS-0.13.2-src/QuiteRSS.pro
+--- QuiteRSS-0.13.2-src.old/QuiteRSS.pro	2013-07-30 18:12:32.000000000 +0200
++++ QuiteRSS-0.13.2-src/QuiteRSS.pro	2013-07-31 20:05:06.220895270 +0200
+@@ -226,7 +226,7 @@ unix {
+   PKGCONFIG += sqlite3
+ 
+   isEmpty(PREFIX) {
+-    PREFIX =   /usr/local
++    PREFIX =   /usr
+   }
+   DATA_DIR = $$PREFIX/share/quiterss
+   DEFINES += DATA_DIR_PATH='\'"$$DATA_DIR"\''
