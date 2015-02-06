@@ -5,7 +5,7 @@
 Name:		quiterss
 Summary:	RSS/Atom feed reader written on Qt
 Version:	0.17.0
-Release:	1
+Release:	2
 License:	GPLv3+
 Group:		Networking/News
 URL:		https://code.google.com/p/quite-rss/
