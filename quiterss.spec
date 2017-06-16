@@ -1,7 +1,7 @@
 %define	oname	QuiteRSS
 %define lname %(echo %oname | tr [:upper:] [:lower:])
 
-%bcond_without qt5
+%bcond_with qt5
 
 Summary:	RSS/Atom feed reader written on Qt
 Name:		%{lname}
@@ -21,7 +21,7 @@ BuildRequires:	pkgconfig(Qt5WebKitWidgets)
 BuildRequires:	pkgconfig(Qt5Widgets)
 BuildRequires:	pkgconfig(Qt5Xml)
 BuildRequires:	pkgconfig(Qt5Sql)
-BuildRequires:	qtsingleapplication-devel
+BuildRequires:	qt5singleapplication-devel # FIXME: missing
 %else
 BuildRequires:	pkgconfig(QtCore)
 BuildRequires:	pkgconfig(QtGui)
@@ -29,7 +29,7 @@ BuildRequires:	pkgconfig(QtNetwork)
 BuildRequires:	pkgconfig(QtWebKit)
 BuildRequires:	pkgconfig(QtXml)
 BuildRequires:	pkgconfig(QtSql)
-BuildRequires:	qt5singleapplication-devel #FIXME
+BuildRequires:	qtsingleapplication-devel
 %endif
 BuildRequires:	pkgconfig(phonon)
 BuildRequires:	pkgconfig(sqlite3)
