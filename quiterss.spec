@@ -1,7 +1,7 @@
 %define	oname	QuiteRSS
 %define lname %(echo %oname | tr [:upper:] [:lower:])
 
-%bcond_with qt5
+%bcond_without qt5
 
 Summary:	RSS/Atom feed reader written on Qt
 Name:		%{lname}
