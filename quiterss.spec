@@ -1,64 +1,41 @@
-%define	oname		QuiteRSS
-#define	oversion	0.13.0.2610
-%define	qtsingleapp	%{_prefix}/lib/qt4/include/QtSolutions/
+%define	oname	QuiteRSS
+%define lname %(echo %oname | tr [:upper:] [:lower:])
 
-Name:		quiterss
+%bcond_with qt5
+
 Summary:	RSS/Atom feed reader written on Qt
-Version:	0.17.0
-Release:	2
+Name:		%{lname}
+Version:	0.18.5
+Release:	0
 License:	GPLv3+
 Group:		Networking/News
-URL:		https://code.google.com/p/quite-rss/
-Source0:	http://quiterss.org/files/0.17.0/QuiteRSS-0.17.0-src.tar.bz2
-Patch1:		QuiteRSS-0.17.0-fix-install-prefix.patch
-BuildRequires:	qt4-devel >= 4.7.0
+URL:		https://quiterss.org/
+Source0:	https://quiterss.org/files/%{version}/%{oname}-%{version}-src.tar.gz
+
+BuildRequires:	desktop-file-utils
+%if %{with qt5}
+BuildRequires:	pkgconfig(Qt5Multimedia)
+BuildRequires:	pkgconfig(Qt5Network)
+BuildRequires:	pkgconfig(Qt5Printsupport)
+BuildRequires:	pkgconfig(Qt5WebKitWidgets)
+BuildRequires:	pkgconfig(Qt5Widgets)
+BuildRequires:	pkgconfig(Qt5Xml)
+BuildRequires:	pkgconfig(Qt5Sql)
 BuildRequires:	qtsingleapplication-devel
-BuildRequires:	sqlite3-devel
+%else
+BuildRequires:	pkgconfig(QtCore)
+BuildRequires:	pkgconfig(QtGui)
+BuildRequires:	pkgconfig(QtNetwork)
+BuildRequires:	pkgconfig(QtWebKit)
+BuildRequires:	pkgconfig(QtXml)
+BuildRequires:	pkgconfig(QtSql)
+BuildRequires:	qt5singleapplication-devel #FIXME
+%endif
 BuildRequires:	pkgconfig(phonon)
+BuildRequires:	pkgconfig(sqlite3)
 
 %description
 QuiteRSS is RSS/Atom feed reader written on Qt.
-
-%prep
-%setup -qn %{oname}-%{version}-src
-#patch0 -p1
-%patch1 -p1
-find . -type f -executable -exec chmod a-x {} \;
-
-%build
-export CFLAGS="%{optflags}"
-%qmake_qt4 SYSTEMQTSA=%{qtsingleapp}
-%make
-
-%install
-make install INSTALL_ROOT=%{buildroot}
-
-%if %{mdvver} >= 201200
-%find_lang %{name} --with-qt
-%else
-cat > %{name}.lang << EOF
-%lang(cs_cz) /usr/share/quiterss/lang/quiterss_cs_cz.qm
-%lang(de) /usr/share/quiterss/lang/quiterss_de.qm
-%lang(en) /usr/share/quiterss/lang/quiterss_en.qm
-%lang(es) /usr/share/quiterss/lang/quiterss_es.qm
-%lang(fa) /usr/share/quiterss/lang/quiterss_fa.qm
-%lang(fr) /usr/share/quiterss/lang/quiterss_fr.qm
-%lang(hu) /usr/share/quiterss/lang/quiterss_hu.qm
-%lang(it) /usr/share/quiterss/lang/quiterss_it.qm
-%lang(ja) /usr/share/quiterss/lang/quiterss_ja.qm
-%lang(ko) /usr/share/quiterss/lang/quiterss_ko.qm
-%lang(lt) /usr/share/quiterss/lang/quiterss_lt.qm
-%lang(nl) /usr/share/quiterss/lang/quiterss_nl.qm
-%lang(pl) /usr/share/quiterss/lang/quiterss_pl.qm
-%lang(pt_br) /usr/share/quiterss/lang/quiterss_pt_br.qm
-%lang(ru) /usr/share/quiterss/lang/quiterss_ru.qm
-%lang(sr) /usr/share/quiterss/lang/quiterss_sr.qm
-%lang(sv) /usr/share/quiterss/lang/quiterss_sv.qm
-%lang(uk) /usr/share/quiterss/lang/quiterss_uk.qm
-%lang(zh_cn) /usr/share/quiterss/lang/quiterss_zh_cn.qm
-EOF
-%endif
-
 
 %files -f %{name}.lang
 %doc AUTHORS CHANGELOG COPYING README
@@ -69,3 +46,31 @@ EOF
 %{_datadir}/%{name}/sound/notification.wav
 %{_datadir}/%{name}/style/*.qss
 %{_datadir}/%{name}/style/*.css
+
+#----------------------------------------------------------------------------
+
+%prep
+%setup -q -c %{name}-%{version}
+
+# remove bundled
+rm -rf 3rdparty/qtsingleapplication
+rm -rf 3rdparty/sqlite
+
+%build
+%setup_compile_flags
+%if %{with qt5}
+%qmake_qt5  PREFIX=%{_prefix} SYSTEMQTSA=true
+%else
+%qmake_qt4  PREFIX=%{_prefix} SYSTEMQTSA=true
+%endif
+%make
+
+%install
+%make_install INSTALL_ROOT=%{buildroot}
+
+# locales
+%find_lang %{name} --with-qt
+
+%check
+desktop-file-validate %{buildroot}/%{_datadir}/applications/%{name}.desktop
+
