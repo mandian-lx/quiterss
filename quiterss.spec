@@ -38,7 +38,7 @@ BuildRequires:	pkgconfig(sqlite3)
 QuiteRSS is RSS/Atom feed reader written on Qt.
 
 %files -f %{name}.lang
-%doc AUTHORS CHANGELOG COPYING README
+%doc AUTHORS CHANGELOG COPYING README.md
 %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_iconsdir}/hicolor/*/apps/%{name}.*
