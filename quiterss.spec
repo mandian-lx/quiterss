@@ -1,8 +1,6 @@
 %define	oname	QuiteRSS
 %define lname %(echo %oname | tr [:upper:] [:lower:])
 
-%bcond_with qt5
-
 Summary:	RSS/Atom feed reader written on Qt
 Name:		%{lname}
 Version:	0.18.5
@@ -13,7 +11,6 @@ URL:		https://quiterss.org/
 Source0:	https://quiterss.org/files/%{version}/%{oname}-%{version}-src.tar.gz
 
 BuildRequires:	desktop-file-utils
-%if %{with qt5}
 BuildRequires:	pkgconfig(Qt5Multimedia)
 BuildRequires:	pkgconfig(Qt5Network)
 BuildRequires:	pkgconfig(Qt5Printsupport)
@@ -21,16 +18,7 @@ BuildRequires:	pkgconfig(Qt5WebKitWidgets)
 BuildRequires:	pkgconfig(Qt5Widgets)
 BuildRequires:	pkgconfig(Qt5Xml)
 BuildRequires:	pkgconfig(Qt5Sql)
-BuildRequires:	qt5singleapplication-devel # FIXME: missing
-%else
-BuildRequires:	pkgconfig(QtCore)
-BuildRequires:	pkgconfig(QtGui)
-BuildRequires:	pkgconfig(QtNetwork)
-BuildRequires:	pkgconfig(QtWebKit)
-BuildRequires:	pkgconfig(QtXml)
-BuildRequires:	pkgconfig(QtSql)
 BuildRequires:	qtsingleapplication-devel
-%endif
 BuildRequires:	pkgconfig(phonon)
 BuildRequires:	pkgconfig(sqlite3)
 
@@ -58,11 +46,7 @@ rm -rf 3rdparty/sqlite
 
 %build
 %setup_compile_flags
-%if %{with qt5}
-%qmake_qt5  PREFIX=%{_prefix} SYSTEMQTSA=true
-%else
-%qmake_qt4  PREFIX=%{_prefix} SYSTEMQTSA=true
-%endif
+%qmake_qt5 PREFIX=%{_prefix} SYSTEMQTSA=true
 %make
 
 %install
