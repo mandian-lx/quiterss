@@ -13,7 +13,7 @@ Source0:	https://quiterss.org/files/%{version}/%{oname}-%{version}-src.tar.gz
 BuildRequires:	desktop-file-utils
 BuildRequires:	pkgconfig(Qt5Multimedia)
 BuildRequires:	pkgconfig(Qt5Network)
-BuildRequires:	pkgconfig(Qt5Printsupport)
+BuildRequires:	pkgconfig(Qt5PrintSupport)
 BuildRequires:	pkgconfig(Qt5WebKitWidgets)
 BuildRequires:	pkgconfig(Qt5Widgets)
 BuildRequires:	pkgconfig(Qt5Xml)
