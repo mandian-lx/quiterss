@@ -19,6 +19,7 @@ BuildRequires:	pkgconfig(Qt5Widgets)
 BuildRequires:	pkgconfig(Qt5Xml)
 BuildRequires:	pkgconfig(Qt5Sql)
 BuildRequires:	qtsingleapplication-devel
+BuildRequires:	qt5-linguist-tools
 BuildRequires:	pkgconfig(phonon)
 BuildRequires:	pkgconfig(sqlite3)
 
