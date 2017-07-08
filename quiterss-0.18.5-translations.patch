@@ -1,0 +1,8 @@
+--- quiterss-0.18.5/lang/lang.pri.translations
++++ quiterss-0.18.5/lang/lang.pri
+@@ -22,4 +22,5 @@
+ updateqm.output = $$DESTDIR/lang/${QMAKE_FILE_BASE}.qm
+ updateqm.commands = $$QMAKE_LRELEASE ${QMAKE_FILE_IN} -qm $$DESTDIR/lang/${QMAKE_FILE_BASE}.qm
+ updateqm.CONFIG += no_link target_predeps
++updateqm.variable_out = translations.files
+ QMAKE_EXTRA_COMPILERS += updateqm

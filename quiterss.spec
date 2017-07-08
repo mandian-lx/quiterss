@@ -9,6 +9,7 @@ License:	GPLv3+
 Group:		Networking/News
 URL:		https://quiterss.org/
 Source0:	https://quiterss.org/files/%{version}/%{oname}-%{version}-src.tar.gz
+Patch0:		%{name}-0.18.5-translations.patch
 
 BuildRequires:	desktop-file-utils
 BuildRequires:	pkgconfig(Qt5Multimedia)
@@ -40,6 +41,7 @@ QuiteRSS is RSS/Atom feed reader written on Qt.
 
 %prep
 %setup -q -c %{name}-%{version}
+%apply_patches
 
 # remove bundled
 rm -rf 3rdparty/qtsingleapplication
