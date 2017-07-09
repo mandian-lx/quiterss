@@ -48,12 +48,11 @@ rm -rf 3rdparty/qtsingleapplication
 rm -rf 3rdparty/sqlite
 
 %build
-%setup_compile_flags
 %qmake_qt5 PREFIX=%{_prefix} SYSTEMQTSA=1
-%make debug
+%make
 
 %install
-%make_install INSTALL_ROOT=%{buildroot}
+%makeinstall_std INSTALL_ROOT=%{buildroot}
 
 # locales
 %find_lang %{name} --with-qt
