@@ -1,4 +1,4 @@
-%define	oname	QuiteRSS
+%define	oname QuiteRSS
 %define lname %(echo %oname | tr [:upper:] [:lower:])
 
 Summary:	RSS/Atom feed reader written on Qt
@@ -50,7 +50,7 @@ rm -rf 3rdparty/sqlite
 %build
 %setup_compile_flags
 %qmake_qt5 PREFIX=%{_prefix} SYSTEMQTSA=true
-%make
+%make debug
 
 %install
 %make_install INSTALL_ROOT=%{buildroot}
