@@ -49,7 +49,7 @@ rm -rf 3rdparty/sqlite
 
 %build
 %setup_compile_flags
-%qmake_qt5 PREFIX=%{_prefix} SYSTEMQTSA=true
+%qmake_qt5 PREFIX=%{_prefix} SYSTEMQTSA=1
 %make debug
 
 %install
