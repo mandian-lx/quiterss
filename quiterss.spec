@@ -52,8 +52,7 @@ rm -rf 3rdparty/sqlite
 %make
 
 %install
-export STRIP=yes
-%makeinstall_std INSTALL_ROOT=%{buildroot}
+%make_install INSTALL_ROOT=%{buildroot} STRIP=echo
 
 # locales
 %find_lang %{name} --with-qt
