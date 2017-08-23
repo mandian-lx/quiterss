@@ -1,2 +1,4 @@
-sources:
+removed_sources:
   QuiteRSS-0.18.5-src.tar.gz: 9ce0781d221e2f18b07c72241bdffe3ecde3a4f9
+sources:
+  QuiteRSS-0.18.7-src.tar.gz: 54647095c443071743ad14cfca951b80a1a66c03
