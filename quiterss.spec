@@ -3,7 +3,7 @@
 
 Summary:	RSS/Atom feed reader written on Qt
 Name:		%{lname}
-Version:	0.18.7
+Version:	0.18.8
 Release:	0
 License:	GPLv3+
 Group:		Networking/News
@@ -43,7 +43,7 @@ QuiteRSS is RSS/Atom feed reader written on Qt.
 %setup -q -c %{name}-%{version}
 %apply_patches
 
-# remove bundled
+# remove (some) bundled
 rm -rf 3rdparty/qtsingleapplication
 rm -rf 3rdparty/sqlite
 
