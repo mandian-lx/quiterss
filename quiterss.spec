@@ -10,6 +10,7 @@ Group:		Networking/News
 URL:		https://quiterss.org/
 Source0:	https://quiterss.org/files/%{version}/%{oname}-%{version}-src.tar.gz
 Patch0:		%{name}-0.18.5-translations.patch
+Patch1:		%{name}-0.18.8-disable-check-for-update.patch
 
 BuildRequires:	desktop-file-utils
 BuildRequires:	pkgconfig(Qt5Multimedia)
