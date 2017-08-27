@@ -11,10 +11,11 @@
    optionsDialog_->statisticsEnabled_->setChecked(statisticsEnabled);
 --- a/src/optionsdialog.cpp
 +++ b/src/optionsdialog.cpp
-@@ -298,6 +298,7 @@
+@@ -298,6 +298,8 @@
    showCloseButtonTab_ = new QCheckBox(tr("Show close button on tab"));
  
    updateCheckEnabled_ = new QCheckBox(tr("Automatically check for updates"));
++  updateCheckEnabled_->setEnasabled(false);
 +  updateCheckEnabled_->setCheckable(false);
    statisticsEnabled_ = new QCheckBox(tr("Help improve QuiteRSS by sending usage information"));
    storeDBMemory_ = new QCheckBox(tr("Store a DB in memory (requires program restart)"));
